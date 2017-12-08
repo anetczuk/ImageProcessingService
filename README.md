@@ -19,7 +19,7 @@ Library can be treated as use-case example of following libraries:
 
 ### Requirements
 
-_ias_ library requires Boost Log. Installation:
+Before compiling _ias_ library execute following commands to install required dependencies:
 1. sudo apt-get install libopencv-dev
 2. sudo apt-get install libboost-log-dev
 3. sudo apt-get install libboost-test-dev
@@ -136,7 +136,6 @@ These scripts illustrates implemented algorithms in action on test images.
 
 ### References
 
-- OpenCV sample: https://gist.github.com/oblinger/efd6f27da74b6c7846954d3b2c2fffa3
 - flood fill: https://en.wikipedia.org/wiki/Flood_fill
 - image filters: https://en.wikipedia.org/wiki/Kernel_%28image_processing%29
 - OpenCV documentation
