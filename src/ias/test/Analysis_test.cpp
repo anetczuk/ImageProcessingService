@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_SUITE( AnalysisSuite )
     BOOST_AUTO_TEST_CASE( loadImage_corrupt ) {
         Analysis object;
 
-        const bool loaded = object.loadImage("data/yesthisfileiscorrupt.png");
+        const bool loaded = object.loadImage("data/corrupt.png");
         BOOST_CHECK_EQUAL( loaded, false );
     }
 
@@ -67,10 +67,10 @@ BOOST_AUTO_TEST_SUITE( AnalysisSuite )
         BOOST_REQUIRE_EQUAL( loaded, true );
 
         const cv::Vec3b color1 = object.color( 45, 0 );
-        BOOST_CHECK_EQUAL( color1, cv::Vec3b(7, 37, 249) );     /// red
+        BOOST_CHECK_EQUAL( color1, cv::Vec3b(0, 0, 255) );          /// red
 
         const cv::Vec3b color2 = object.color( 0, 45 );
-        BOOST_CHECK_EQUAL( color2, cv::Vec3b(37, 249, 5) );     /// green
+        BOOST_CHECK_EQUAL( color2, cv::Vec3b(255, 255, 255) );      /// white
     }
 
     BOOST_AUTO_TEST_CASE( color_valid2 ) {
@@ -80,12 +80,11 @@ BOOST_AUTO_TEST_SUITE( AnalysisSuite )
         BOOST_REQUIRE_EQUAL( loaded, true );
 
         const cv::Vec3b color1 = object.color( cv::Point(0, 45) );
-        BOOST_CHECK_EQUAL( color1, cv::Vec3b(7, 37, 249) );             /// red
+        BOOST_CHECK_EQUAL( color1, cv::Vec3b(0, 0, 255) );                  /// red
 
         const cv::Vec3b color2 = object.color( cv::Point(45, 0) );
-        BOOST_CHECK_EQUAL( color2, cv::Vec3b(37, 249, 5) );             /// green
+        BOOST_CHECK_EQUAL( color2, cv::Vec3b(255, 255, 255) );              /// white
     }
-
 
     BOOST_AUTO_TEST_CASE( findRegion_invalid ) {
         Analysis object;
@@ -102,7 +101,7 @@ BOOST_AUTO_TEST_SUITE( AnalysisSuite )
         BOOST_REQUIRE_EQUAL( loaded, true );
 
         const cv::Point point(0, 30);
-        const cv::Vec3b color(7, 37, 249);
+        const cv::Vec3b color(0, 0, 255);
         object.findRegion( point, color, 20 );
 
         const cv::Mat& region = object.result();
@@ -122,8 +121,8 @@ BOOST_AUTO_TEST_SUITE( AnalysisSuite )
         const bool loaded = object.loadImage("data/test1.png");
         BOOST_REQUIRE_EQUAL( loaded, true );
 
-        const cv::Point point(100, 50);
-        const cv::Vec3b color(7, 37, 249);
+        const cv::Point point(200, 200);
+        const cv::Vec3b color(0, 0, 255);
         object.findRegion( point, color, 20 );
 
         const cv::Mat& region = object.result();
@@ -132,9 +131,9 @@ BOOST_AUTO_TEST_SUITE( AnalysisSuite )
         BOOST_CHECK_EQUAL( region.rows, object.image().rows );
         BOOST_CHECK_EQUAL( region.cols, object.image().cols );
 
-        BOOST_CHECK_EQUAL( region.at<uchar>(0, 0), 0 );          /// green RGB(5, 249, 37) background
-        BOOST_CHECK_EQUAL( region.at<uchar>(40, 10), 0 );        /// first red RGB(249, 37, 7) rectangle
-        BOOST_CHECK_EQUAL( region.at<uchar>(50, 100), 255 );     /// second red rectangle
+        BOOST_CHECK_EQUAL( region.at<uchar>(0, 0), 0 );             /// white RGB(255, 255, 255) background
+        BOOST_CHECK_EQUAL( region.at<uchar>(40, 10), 0 );           /// first red RGB(255, 0, 0) rectangle
+        BOOST_CHECK_EQUAL( region.at<uchar>(220, 220), 255 );       /// second red rectangle
     }
 
 
@@ -180,7 +179,7 @@ BOOST_AUTO_TEST_SUITE( AnalysisSuite )
         const bool loaded = object.loadImage("data/test1.png");
         BOOST_REQUIRE_EQUAL( loaded, true );
 
-        object.findRegion( cv::Point(0, 30), cv::Vec3b(7, 37, 249), 20 );
+        object.findRegion( cv::Point(0, 30), cv::Vec3b(0, 0, 255), 20 );
         const cv::Mat& region = object.result();
         object.findPerimeter( region );
 
