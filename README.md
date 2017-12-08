@@ -30,7 +30,7 @@ Before compiling _ias_ library execute following commands to install required de
 cmake .
 make
 
-Running cli app: ./ias/main/ias
+Running cli app: ./ias/main/iascli
 Running tests: ./ias/test/runTests.sh
 
 Application was built under:
@@ -100,7 +100,7 @@ performs *SAVE_PIXELS* operation
 
 ### Command line interface
 
-Application _ias_ takes following command line arguments:
+Application _iascli_ takes following command line arguments:
 - --help -- print help message
 - --logcout -- print messages to stdout instead of _logger.log_ file
 - --image=[path] -- load image from file _path_
@@ -116,7 +116,7 @@ Application _ias_ takes following command line arguments:
 - --savePixels=[path] -- save image to file _path_
 
 Application supports _streaming_(repeating) all parameters (expect of --help). E.g. it is possible to make following call:
-_ias --image=test.png --findRegion=0,0,0,0,0,0 --savePixels=out1.png --findPerimeter --savePixels=out1.png_ 
+_iascli --image=test.png --findRegion=0,0,0,0,0,0 --savePixels=out1.png --findPerimeter --savePixels=out1.png_ 
 
 
 ### Examples of use
